@@ -44,4 +44,10 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         pausePanel.SetActive(false);
     } 
+
+    public void QuitToMainMenu() 
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
+    }
 }
