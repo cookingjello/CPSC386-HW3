@@ -43,11 +43,17 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         isPaused = false;
         pausePanel.SetActive(false);
-    } 
+    }
 
-    public void QuitToMainMenu() 
+    public void QuitToMainMenu()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
+    }
+
+    public void SaveGame()
+    {
+        SaveManager.SaveGame(); //AI ADDED
+        Debug.Log("Game saved to: " + SaveManager.SaveFilePath); //AI ADDED
     }
 }
