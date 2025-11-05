@@ -1,51 +1,53 @@
-/*
-This script was written with guidance from the following tutorials:
-Audio Management:
-https://www.youtube.com/watch?v=G-JUp8AMEx0
-Youtube Channel: Rehope Games
-
-Some aspects and lines of this script were modified or added using VS Code Copilot AI.
-Lines specifically added or modified by AI are marked with "AI-ADDED" comments.
-*/
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using System.IO;
 
 public class MenuManager : MonoBehaviour
 {
-
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider SFXSlider;
-
     public GameObject optionsPanel;
        
+    public void ContinueGame()
+{
+    if (File.Exists(SaveManager.SaveFilePath))
+    {
+        Debug.Log("Will load saved game after scene loads...");
+        SaveManager.LoadAfterSceneLoad = true;
+    }
+    else
+    {
+        Debug.LogWarning("No save file found! Starting a new game instead.");
+        SaveManager.LoadAfterSceneLoad = false;
+    }
+
+    SceneManager.LoadScene("Game");
+}
+
+
+
+
     public void GameMenu()
     {
         SceneManager.LoadScene("Menu");
     }
+
     void Start()
     {
         if (PlayerPrefs.HasKey("musicVolume"))
-        {
             LoadMusicVolume();
-        }
         else
-        {
             SetMusicVolume();
-        }
 
-          if (PlayerPrefs.HasKey("SFXVolume"))
-        {
+        if (PlayerPrefs.HasKey("SFXVolume"))
             LoadSFXVolume();
-        }
         else
-        {
             SetSFXVolume();
-        }
     }
+
     public void SetMusicVolume()
     {
         float musicVolume = musicSlider.value;
@@ -75,10 +77,9 @@ public class MenuManager : MonoBehaviour
     public void StartGameScene()
     {
         Time.timeScale = 1;
-        PlayerPrefs.SetFloat("player_moveSpeed", 1.2f); // AI-ADDED
-        PlayerPrefs.Save(); // AI-ADDED
-        PlayerPrefs.SetInt("player_score", 0); // AI-ADDED
-        PlayerPrefs.Save(); // AI-ADDED
+        PlayerPrefs.SetFloat("player_moveSpeed", 1.2f);
+        PlayerPrefs.SetInt("player_score", 0);
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Game");
     }
 
@@ -86,19 +87,10 @@ public class MenuManager : MonoBehaviour
     {
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-
         #endif
         Application.Quit();
     }
 
-    public void ShowOptions()
-    {
-        optionsPanel.SetActive(true);
-    }
-    
-    public void HideOptions()
-    {
-        optionsPanel.SetActive(false);
-    }
+    public void ShowOptions() => optionsPanel.SetActive(true);
+    public void HideOptions() => optionsPanel.SetActive(false);
 }
-

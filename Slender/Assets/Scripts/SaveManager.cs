@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public static class SaveManager
 {
     public static string SaveFilePath => Path.Combine(Application.persistentDataPath, "savegame.json");
+    // inside SaveManager (anywhere near the top of the class)
+public static bool LoadAfterSceneLoad = false;
+
 
     [System.Serializable]
     private class PaperEntry
