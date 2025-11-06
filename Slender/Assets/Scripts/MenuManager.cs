@@ -37,29 +37,28 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        // Ensure sliders and mixer are assigned before using them to avoid NREs // AI-ADDED
-        if (musicSlider != null && myMixer != null) // AI-ADDED
+        if (musicSlider != null && myMixer != null)
         {
-            if (PlayerPrefs.HasKey("musicVolume")) // AI-ADDED
-                LoadMusicVolume(); // AI-ADDED
-            else // AI-ADDED
-                SetMusicVolume(); // AI-ADDED
+            if (PlayerPrefs.HasKey("musicVolume"))
+                LoadMusicVolume();
+            else
+                SetMusicVolume();
         }
-        else // AI-ADDED
+        else
         {
-            Debug.LogWarning("MenuManager: musicSlider or myMixer not assigned in inspector."); // AI-ADDED
+            Debug.LogWarning("MenuManager: musicSlider or myMixer not assigned in inspector.");
         }
 
-        if (SFXSlider != null && myMixer != null) // AI-ADDED
+        if (SFXSlider != null && myMixer != null)
         {
-            if (PlayerPrefs.HasKey("SFXVolume")) // AI-ADDED
-                LoadSFXVolume(); // AI-ADDED
-            else // AI-ADDED
-                SetSFXVolume(); // AI-ADDED
+            if (PlayerPrefs.HasKey("SFXVolume"))
+                LoadSFXVolume();
+            else
+                SetSFXVolume();
         }
-        else // AI-ADDED
+        else
         {
-            Debug.LogWarning("MenuManager: SFXSlider or myMixer not assigned in inspector."); // AI-ADDED
+            Debug.LogWarning("MenuManager: SFXSlider or myMixer not assigned in inspector.");
         }
     }
 

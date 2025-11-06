@@ -22,6 +22,9 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthBar.SetHealth(currentHealth);
 
+        var audioMgr = AudioManager.Instance; //AI-ADDED
+        if (audioMgr != null && audioMgr.health != null) audioMgr.PlayHealth(audioMgr.health); //AI-ADDED
+
         if (currentHealth <= 0)
             GameOver();
     }

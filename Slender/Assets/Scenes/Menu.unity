@@ -152,7 +152,8 @@ MonoBehaviour:
   SFXSource: {fileID: 1586333229}
   myMixer: {fileID: 24100000, guid: 5bb32020273a29a4db1353da56779040, type: 2}
   background: {fileID: 8300000, guid: 0a097624e45758441b604c86145c1cfc, type: 3}
-  explosion: {fileID: 0}
+  paper: {fileID: 8300000, guid: 87e6ec3259df60548a00983b69992e64, type: 3}
+  health: {fileID: 8300000, guid: 8dc7fb456bf2b2d45af37541dcfd2cb5, type: 3}
 --- !u!4 &13123228
 Transform:
   m_ObjectHideFlags: 0
@@ -1199,7 +1200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -26.71}
+  m_AnchoredPosition: {x: 0, y: -26.710022}
   m_SizeDelta: {x: 410, y: 67}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &536436940

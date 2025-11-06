@@ -19,7 +19,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioMixer myMixer;
 
     public AudioClip background;
-    public AudioClip explosion;
+    public AudioClip paper;
+    public AudioClip health;
 
     private void Awake()
     {
@@ -45,7 +46,12 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlayPaper(AudioClip clip)
+    {
+        SFXSource.PlayOneShot(clip);
+    }
+
+    public void PlayHealth(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);
     }
