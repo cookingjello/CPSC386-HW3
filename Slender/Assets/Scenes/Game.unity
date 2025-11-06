@@ -114132,11 +114132,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7566719922055012788, guid: e7c8e661951231d45b22ab977c9050ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.320923
+      value: -31.97
       objectReference: {fileID: 0}
     - target: {fileID: 7566719922055012788, guid: e7c8e661951231d45b22ab977c9050ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.8708076
+      value: -40.85
       objectReference: {fileID: 0}
     - target: {fileID: 7566719922055012788, guid: e7c8e661951231d45b22ab977c9050ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -115683,7 +115683,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Collect 8 pages to escape\n\nThere is a monster looking for you \n\nDon't
-    look at him more than five times\n\nUse WASD to navigate the map"
+    let him get in your light (even through walls)\n\nUse WASD to navigate the map"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -115981,9 +115981,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: StartGameScene
+      - m_Target: {fileID: 1002519462}
+        m_TargetAssemblyTypeName: RetryManager, Assembly-CSharp
+        m_MethodName: TryAgain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -116368,9 +116368,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: StartGameScene
+      - m_Target: {fileID: 1002519462}
+        m_TargetAssemblyTypeName: RetryManager, Assembly-CSharp
+        m_MethodName: TryAgain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -116499,11 +116499,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7566719922055012788, guid: e7c8e661951231d45b22ab977c9050ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.132734
+      value: -75.7
       objectReference: {fileID: 0}
     - target: {fileID: 7566719922055012788, guid: e7c8e661951231d45b22ab977c9050ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.1660137
+      value: -29.7
       objectReference: {fileID: 0}
     - target: {fileID: 7566719922055012788, guid: e7c8e661951231d45b22ab977c9050ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -116542,6 +116542,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7c8e661951231d45b22ab977c9050ad, type: 3}
+--- !u!1 &1002519461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1002519463}
+  - component: {fileID: 1002519462}
+  m_Layer: 0
+  m_Name: RetryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1002519462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002519461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae40b1e75520d842ae4b24c7df76b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1002519463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002519461}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 500.2902, y: 301.6115, z: -3.1672852}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1008946398
 GameObject:
   m_ObjectHideFlags: 0
@@ -119459,3 +119503,4 @@ SceneRoots:
   - {fileID: 494252338}
   - {fileID: 1568482607}
   - {fileID: 1617070296}
+  - {fileID: 1002519463}
