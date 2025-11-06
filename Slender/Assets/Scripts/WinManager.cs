@@ -1,5 +1,5 @@
 /*
-
+    AI assisted with formatting this script, as well as adding debug logs to properly identify any problems the code was having
 */
 
 
