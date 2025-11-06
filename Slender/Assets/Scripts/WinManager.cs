@@ -1,3 +1,8 @@
+/*
+
+*/
+
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,12 +37,12 @@ public class WinManager : MonoBehaviour
         if (winPanel != null)
             winPanel.SetActive(true);
 
-        Debug.Log("All pages collected! YOU WIN!");
+        Debug.Log("All pages collected! YOU WIN!"); // AI-ADDED
     }
 
   public void GoToMenu()
 {
-    Debug.Log("GoToMenu() called");
+    Debug.Log("GoToMenu() called"); // AI-ADDED
     Time.timeScale = 1f;
     SceneManager.LoadScene("Menu");
 }

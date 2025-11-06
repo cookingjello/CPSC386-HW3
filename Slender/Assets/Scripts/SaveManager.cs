@@ -1,3 +1,13 @@
+/*
+    This script was made with the assistance of a YouTube video: 
+    https://www.youtube.com/watch?v=XOjd_qU2Ido
+    Channel: Brackeys
+
+    AI also assisted in making this script in areas where the tutorial was not sufficient.
+
+*/
+
+
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -31,7 +41,7 @@ public static bool LoadAfterSceneLoad = false;
         public List<PaperEntry> papers = new List<PaperEntry>();
     }
 
-    public static void SaveGame()
+    public static void SaveGame() // AI-ADDED
     {
         var playerInv = Object.FindObjectOfType<PlayerInventory>();
         if (playerInv == null)
@@ -59,7 +69,7 @@ public static bool LoadAfterSceneLoad = false;
         // Find all Paper components in the current scene (including inactive)
         var allPapers = Resources.FindObjectsOfTypeAll<Paper>();
         var activeScene = SceneManager.GetActiveScene();
-        foreach (var p in allPapers)
+        foreach (var p in allPapers) // AI-ADDED
         {
             if (p == null || p.gameObject == null) continue;
             if (p.gameObject.scene != activeScene) continue; // skip prefabs/assets and other scenes
@@ -83,7 +93,7 @@ public static bool LoadAfterSceneLoad = false;
         }
     }
 
-    public static void LoadGame()
+    public static void LoadGame() 
     {
         if (!File.Exists(SaveFilePath))
         {
