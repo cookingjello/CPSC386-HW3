@@ -1,3 +1,8 @@
+/*
+    This script was made using mostly AI assistance..
+*/
+
+
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -6,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
 
     public HealthBar healthBar;
-    public GameObject gameOverPanel; // assign your panel in the inspector
+    public GameObject gameOverPanel; 
 
     void Start()
     {
@@ -16,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
             gameOverPanel.SetActive(false);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) //AI-ADDED
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);

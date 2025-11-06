@@ -1,3 +1,10 @@
+/*
+    This script was written using a YouTube video as guidance:
+    https://youtu.be/XOjd_qU2Ido
+    YouTube channel: Brackeys
+*/
+
+
 using System.Collections;
 using UnityEngine;
 
@@ -7,8 +14,7 @@ public class GameInitializer : MonoBehaviour
     {
         if (SaveManager.LoadAfterSceneLoad)
         {
-            // wait one frame to allow all Awake/Start on scene objects to run,
-            // so objects like PlayerInventory or movement scripts don't overwrite the loaded position.
+
             yield return null;
 
             SaveManager.LoadAfterSceneLoad = false;

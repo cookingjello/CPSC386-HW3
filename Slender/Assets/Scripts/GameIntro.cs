@@ -1,28 +1,32 @@
+/*
+    The intention of this script is to display an introductory panel at the start of the game, disabling player movement during this time.
+    After a set duration, the panel is hidden and player movement is re-enabled.
+    This script was written with a small amount of help from AI.
+*/
+
+
 using System.Collections;
 using UnityEngine;
 
 public class GameIntro : MonoBehaviour
 {
     public GameObject introPanel;
-    public float introDuration = 5f; // how long to show the panel
-    private Movement playerMovement; // or whatever your movement script is called
+    public float introDuration = 5f; 
+    private Movement playerMovement; 
 
     void Start()
     {
-        // Find the player and its movement component
-        playerMovement = FindObjectOfType<Movement>(); 
+        playerMovement = FindObjectOfType<Movement>(); //AI-ADDED
         if (playerMovement != null)
-            playerMovement.enabled = false; // disable player control initially
+            playerMovement.enabled = false; 
 
-        // Show the intro panel
         if (introPanel != null)
             introPanel.SetActive(true);
 
-        // Start coroutine to hide the panel after a few seconds
         StartCoroutine(HideIntroPanelAfterDelay());
     }
 
-    IEnumerator HideIntroPanelAfterDelay()
+    IEnumerator HideIntroPanelAfterDelay() //AI-ADDED
     {
         yield return new WaitForSeconds(introDuration);
 
@@ -30,6 +34,6 @@ public class GameIntro : MonoBehaviour
             introPanel.SetActive(false);
 
         if (playerMovement != null)
-            playerMovement.enabled = true; // re-enable player control
+            playerMovement.enabled = true; 
     }
 }

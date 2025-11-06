@@ -1,3 +1,10 @@
+/*
+    This script was written using this video as guidance: 
+https://youtu.be/XOjd_qU2Ido?si=Q-KN53rnNj4Z9xVc 
+YouTub channel: Brackeys
+*/
+
+
 using UnityEngine;
 using UnityEngine.UI;
 
