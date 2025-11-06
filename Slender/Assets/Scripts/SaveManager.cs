@@ -25,6 +25,8 @@ public static bool LoadAfterSceneLoad = false;
         public float playerX;
         public float playerY;
         public float playerZ;
+        public int playerCurrentHealth; // AI-ADDED
+        public int playerMaxHealth; // AI-ADDED
         public int numberOfPapers;
         public List<PaperEntry> papers = new List<PaperEntry>();
     }
@@ -45,6 +47,14 @@ public static bool LoadAfterSceneLoad = false;
         data.playerY = playerTransform.position.y;
         data.playerZ = playerTransform.position.z;
         data.numberOfPapers = playerInv.NumberOfPapers;
+
+        // Save player health if a PlayerHealth component exists // AI-ADDED
+        var playerHealth = Object.FindObjectOfType<PlayerHealth>(); // AI-ADDED
+        if (playerHealth != null) // AI-ADDED
+        {
+            data.playerCurrentHealth = playerHealth.GetCurrentHealth(); // AI-ADDED
+            data.playerMaxHealth = playerHealth.maxHealth; // AI-ADDED
+        } // AI-ADDED
 
         // Find all Paper components in the current scene (including inactive)
         var allPapers = Resources.FindObjectsOfTypeAll<Paper>();
@@ -102,6 +112,17 @@ public static bool LoadAfterSceneLoad = false;
 
         playerInv.transform.position = new Vector3(data.playerX, data.playerY, data.playerZ);
         playerInv.SetNumberOfPapers(data.numberOfPapers);
+
+        // Restore player health if possible // AI-ADDED
+        var playerHealth = Object.FindObjectOfType<PlayerHealth>(); // AI-ADDED
+        if (playerHealth != null) // AI-ADDED
+        {
+            // If the saved max health differs, apply it first so current clamps correctly // AI-ADDED
+            if (data.playerMaxHealth > 0) // AI-ADDED
+                playerHealth.SetMaxHealth(data.playerMaxHealth); // AI-ADDED
+
+            playerHealth.SetCurrentHealth(data.playerCurrentHealth); // AI-ADDED
+        } // AI-ADDED
 
         // Restore paper active states by matching positions
         var allPapers = Resources.FindObjectsOfTypeAll<Paper>();

@@ -37,41 +37,60 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("musicVolume"))
-            LoadMusicVolume();
-        else
-            SetMusicVolume();
+        // Ensure sliders and mixer are assigned before using them to avoid NREs // AI-ADDED
+        if (musicSlider != null && myMixer != null) // AI-ADDED
+        {
+            if (PlayerPrefs.HasKey("musicVolume")) // AI-ADDED
+                LoadMusicVolume(); // AI-ADDED
+            else // AI-ADDED
+                SetMusicVolume(); // AI-ADDED
+        }
+        else // AI-ADDED
+        {
+            Debug.LogWarning("MenuManager: musicSlider or myMixer not assigned in inspector."); // AI-ADDED
+        }
 
-        if (PlayerPrefs.HasKey("SFXVolume"))
-            LoadSFXVolume();
-        else
-            SetSFXVolume();
+        if (SFXSlider != null && myMixer != null) // AI-ADDED
+        {
+            if (PlayerPrefs.HasKey("SFXVolume")) // AI-ADDED
+                LoadSFXVolume(); // AI-ADDED
+            else // AI-ADDED
+                SetSFXVolume(); // AI-ADDED
+        }
+        else // AI-ADDED
+        {
+            Debug.LogWarning("MenuManager: SFXSlider or myMixer not assigned in inspector."); // AI-ADDED
+        }
     }
 
     public void SetMusicVolume()
     {
-        float musicVolume = musicSlider.value;
-        myMixer.SetFloat("Music", Mathf.Log10(musicVolume) * 20);
-        PlayerPrefs.SetFloat("musicVolume", musicVolume);
+        if (musicSlider == null || myMixer == null) { Debug.LogWarning("MenuManager: cannot SetMusicVolume - missing references."); return; } // AI-ADDED
+        float musicVolume = musicSlider.value; // AI-ADDED
+        myMixer.SetFloat("Music", Mathf.Log10(musicVolume) * 20); // AI-ADDED
+        PlayerPrefs.SetFloat("musicVolume", musicVolume); // AI-ADDED
     }
 
     public void SetSFXVolume()
     {
-        float SFXVolume = SFXSlider.value;
-        myMixer.SetFloat("SFX", Mathf.Log10(SFXVolume) * 20);
-        PlayerPrefs.SetFloat("SFXVolume", SFXVolume);
+        if (SFXSlider == null || myMixer == null) { Debug.LogWarning("MenuManager: cannot SetSFXVolume - missing references."); return; } // AI-ADDED
+        float SFXVolume = SFXSlider.value; // AI-ADDED
+        myMixer.SetFloat("SFX", Mathf.Log10(SFXVolume) * 20); // AI-ADDED
+        PlayerPrefs.SetFloat("SFXVolume", SFXVolume); // AI-ADDED
     }
 
     private void LoadMusicVolume()
     {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        SetMusicVolume();
+        if (musicSlider == null) { Debug.LogWarning("MenuManager: cannot LoadMusicVolume - musicSlider is null."); return; } // AI-ADDED
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume"); // AI-ADDED
+        SetMusicVolume(); // AI-ADDED
     }
      
     private void LoadSFXVolume()
     {
-        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
-        SetSFXVolume();
+        if (SFXSlider == null) { Debug.LogWarning("MenuManager: cannot LoadSFXVolume - SFXSlider is null."); return; } // AI-ADDED
+        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume"); // AI-ADDED
+        SetSFXVolume(); // AI-ADDED
     }       
 
     public void StartGameScene()
