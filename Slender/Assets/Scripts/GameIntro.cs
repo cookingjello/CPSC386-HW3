@@ -13,6 +13,8 @@ public class GameIntro : MonoBehaviour
     public GameObject introPanel;
     public float introDuration = 5f; 
     private Movement playerMovement; 
+    // Reference to running coroutine so we can stop it if skipped // AI-ADDED
+    private Coroutine hideCoroutine; // AI-ADDED
 
     void Start()
     {
@@ -23,17 +25,37 @@ public class GameIntro : MonoBehaviour
         if (introPanel != null)
             introPanel.SetActive(true);
 
-        StartCoroutine(HideIntroPanelAfterDelay());
+        hideCoroutine = StartCoroutine(HideIntroPanelAfterDelay()); // AI-ADDED
     }
+
+    // Intentionally no Update() key-based skipping; SkipIntro() is public for UI Button use only // AI-ADDED
 
     IEnumerator HideIntroPanelAfterDelay() //AI-ADDED
     {
         yield return new WaitForSeconds(introDuration);
 
-        if (introPanel != null)
-            introPanel.SetActive(false);
+        ApplyEndIntro(); // AI-ADDED
+    }
 
-        if (playerMovement != null)
-            playerMovement.enabled = true; 
+    // Public method so a UI button can call it to skip the intro immediately // AI-ADDED
+    public void SkipIntro() // AI-ADDED
+    {
+        if (hideCoroutine != null) // AI-ADDED
+        {
+            StopCoroutine(hideCoroutine); // AI-ADDED
+            hideCoroutine = null; // AI-ADDED
+        }
+
+        ApplyEndIntro(); // AI-ADDED
+    }
+
+    // Centralized logic for ending the intro (hide panel + enable movement) // AI-ADDED
+    private void ApplyEndIntro() // AI-ADDED
+    {
+        if (introPanel != null) // AI-ADDED
+            introPanel.SetActive(false); // AI-ADDED
+
+        if (playerMovement != null) // AI-ADDED
+            playerMovement.enabled = true; // AI-ADDED
     }
 }

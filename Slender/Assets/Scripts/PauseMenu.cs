@@ -15,9 +15,15 @@ public class PauseMenu : MonoBehaviour
     private bool isPaused;
 
     public GameObject pausePanel;
+    public GameObject introPanel; // UNITY 4
 
     void Update()
     {
+        if (introPanel != null && introPanel.activeSelf) // UnITY 4
+        {
+            return; // Don't allow pausing if intro panel is active
+        }
+        
         if (Input.GetButtonDown("Pause"))
         {
             if (isPaused)

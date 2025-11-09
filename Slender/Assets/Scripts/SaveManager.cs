@@ -37,6 +37,7 @@ public static bool LoadAfterSceneLoad = false;
         public float playerZ;
         public int playerCurrentHealth; // AI-ADDED
         public int playerMaxHealth; // AI-ADDED
+        public float playerElapsedTime; // AI-ADDED
         public int numberOfPapers;
         public List<PaperEntry> papers = new List<PaperEntry>();
     }
@@ -64,6 +65,13 @@ public static bool LoadAfterSceneLoad = false;
         {
             data.playerCurrentHealth = playerHealth.GetCurrentHealth(); // AI-ADDED
             data.playerMaxHealth = playerHealth.maxHealth; // AI-ADDED
+        } // AI-ADDED
+
+        // Save timer if present // AI-ADDED
+        var timer = Object.FindObjectOfType<Timer>(); // AI-ADDED
+        if (timer != null) // AI-ADDED
+        {
+            data.playerElapsedTime = timer.GetElapsedTime(); // AI-ADDED
         } // AI-ADDED
 
         // Find all Paper components in the current scene (including inactive)
@@ -132,6 +140,13 @@ public static bool LoadAfterSceneLoad = false;
                 playerHealth.SetMaxHealth(data.playerMaxHealth); // AI-ADDED
 
             playerHealth.SetCurrentHealth(data.playerCurrentHealth); // AI-ADDED
+        } // AI-ADDED
+
+        // Restore timer if present // AI-ADDED
+        var timer = Object.FindObjectOfType<Timer>(); // AI-ADDED
+        if (timer != null) // AI-ADDED
+        {
+            timer.SetElapsedTime(data.playerElapsedTime); // AI-ADDED
         } // AI-ADDED
 
         // Restore paper active states by matching positions
