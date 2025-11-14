@@ -13,8 +13,9 @@ public class SpeedPowerup : MonoBehaviour
 
             if (playerScript)
             {
-                playerScript.speed += increase;
-                Destroy(gameObject);
+                playerScript.speed += increase; //AI ADDED
+                if (AudioManager.Instance != null && AudioManager.Instance.speedPowerUp != null) AudioManager.Instance.PlayPowerUp(AudioManager.Instance.speedPowerUp); //AI ADDED
+                Destroy(gameObject); //AI ADDED
             }
         }
     }

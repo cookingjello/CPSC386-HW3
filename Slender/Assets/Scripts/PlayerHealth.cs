@@ -11,7 +11,9 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
 
     public HealthBar healthBar;
-    public GameObject gameOverPanel; 
+    public GameObject gameOverPanel;
+
+    public GameObject healthPowerUp;
 
     void Start()
     {
@@ -78,4 +80,13 @@ public class PlayerHealth : MonoBehaviour
         if (healthBar != null) // AI-ADDED
             healthBar.SetHealth(currentHealth); // AI-ADDED
     } // AI-ADDED
+
+    // Heal the player by a (float) amount. Accepts fractional values and rounds to nearest int. // AI-ADDED
+    public void Heal(float amount) // AI-ADDED
+    {
+        int inc = Mathf.RoundToInt(amount); // AI-ADDED
+        SetCurrentHealth(currentHealth + inc); // AI-ADDED
+    } // AI-ADDED
+
+    
 }

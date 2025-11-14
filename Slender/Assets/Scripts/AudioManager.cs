@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip background;
     public AudioClip paper;
     public AudioClip health;
+    public AudioClip speedPowerUp; 
 
     private void Awake()
     {
@@ -54,5 +55,10 @@ public class AudioManager : MonoBehaviour
     public void PlayHealth(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);
+    }
+
+    public void PlayPowerUp(AudioClip clip)
+    {
+        SFXSource.PlayOneShot(clip); //AI ADDED
     }
 }
