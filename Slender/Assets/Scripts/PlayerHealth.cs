@@ -13,8 +13,6 @@ public class PlayerHealth : MonoBehaviour
     public HealthBar healthBar;
     public GameObject gameOverPanel;
 
-    public GameObject healthPowerUp;
-
     void Start()
     {
         currentHealth = maxHealth;
@@ -85,7 +83,9 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount) // AI-ADDED
     {
         int inc = Mathf.RoundToInt(amount); // AI-ADDED
-        SetCurrentHealth(currentHealth + inc); // AI-ADDED
+        currentHealth = Mathf.Clamp(currentHealth + inc, 0, maxHealth); // AI-ADDED
+        if (healthBar != null) healthBar.SetHealth(currentHealth); // AI-ADDED
+        Debug.Log("HealthPowerUp: Player healed. Current health: " + currentHealth); //AI ADDED
     } // AI-ADDED
 
     

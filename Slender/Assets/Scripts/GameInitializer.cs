@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class GameInitializer : MonoBehaviour
 {
+    
     IEnumerator Start()
     {
         if (SaveManager.LoadAfterSceneLoad)

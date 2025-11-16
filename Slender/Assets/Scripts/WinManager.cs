@@ -31,6 +31,7 @@ public class WinManager : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     private void WinGame()
     {
         Time.timeScale = 0f;

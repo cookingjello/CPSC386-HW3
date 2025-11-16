@@ -16,6 +16,7 @@ public class GameIntro : MonoBehaviour
     // Reference to running coroutine so we can stop it if skipped // AI-ADDED
     private Coroutine hideCoroutine; // AI-ADDED
 
+    [System.Obsolete]
     void Start()
     {
         playerMovement = FindObjectOfType<Movement>(); //AI-ADDED

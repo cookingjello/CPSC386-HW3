@@ -1,6 +1,7 @@
 // https://www.youtube.com/watch?v=EfUCEwKmcjc
 
 
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,20 +21,19 @@ public void PaperCollected()
             {
                 OnPaperCollected.Invoke(this);
             }
-            catch (System.ArgumentException e)
+            catch (ArgumentException e)
             {
                 Debug.LogError("OnPaperCollected listener argument mismatch: " + e.Message);
             }
         }
     }
 
-    // Called by save/load system to restore the number of papers collected.
-    public void SetNumberOfPapers(int count)
+    // Restore the paper count (used by save/load). // AI-ADDED
+    public void SetNumberOfPapers(int count) // AI-ADDED
     {
-        NumberOfPapers = count;
-        if (OnPaperCollected != null)
+        NumberOfPapers = Mathf.Max(0, count); // AI-ADDED
+        if (OnPaperCollected != null) // AI-ADDED
         {
-            // Update any UI listeners with the restored value.
             try { OnPaperCollected.Invoke(this); } catch { }
         }
     }

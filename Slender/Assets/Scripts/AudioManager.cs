@@ -21,7 +21,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip background;
     public AudioClip paper;
     public AudioClip health;
-    public AudioClip speedPowerUp; 
+    public AudioClip speedPowerUp;
+    public AudioClip healthPowerUp;
 
     private void Awake()
     {

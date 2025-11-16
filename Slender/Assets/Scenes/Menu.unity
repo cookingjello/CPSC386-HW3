@@ -155,6 +155,7 @@ MonoBehaviour:
   paper: {fileID: 8300000, guid: 87e6ec3259df60548a00983b69992e64, type: 3}
   health: {fileID: 8300000, guid: 8dc7fb456bf2b2d45af37541dcfd2cb5, type: 3}
   speedPowerUp: {fileID: 8300000, guid: 0469b439b74895447bf75c6de1783c09, type: 3}
+  healthPowerUp: {fileID: 8300000, guid: cd467d73787bf2c47a9f506a7e385406, type: 3}
 --- !u!4 &13123228
 Transform:
   m_ObjectHideFlags: 0

@@ -42,9 +42,10 @@ public static bool LoadAfterSceneLoad = false;
         public List<PaperEntry> papers = new List<PaperEntry>();
     }
 
+    
     public static void SaveGame() // AI-ADDED
     {
-        var playerInv = Object.FindObjectOfType<PlayerInventory>();
+        var playerInv = Object.FindFirstObjectByType<PlayerInventory>();
         if (playerInv == null)
         {
             Debug.LogError("Save failed: no PlayerInventory found in scene.");
@@ -60,7 +61,7 @@ public static bool LoadAfterSceneLoad = false;
         data.numberOfPapers = playerInv.NumberOfPapers;
 
         // Save player health if a PlayerHealth component exists // AI-ADDED
-        var playerHealth = Object.FindObjectOfType<PlayerHealth>(); // AI-ADDED
+        var playerHealth = Object.FindFirstObjectByType<PlayerHealth>(); // AI-ADDED
         if (playerHealth != null) // AI-ADDED
         {
             data.playerCurrentHealth = playerHealth.GetCurrentHealth(); // AI-ADDED
@@ -68,7 +69,7 @@ public static bool LoadAfterSceneLoad = false;
         } // AI-ADDED
 
         // Save timer if present // AI-ADDED
-        var timer = Object.FindObjectOfType<Timer>(); // AI-ADDED
+        var timer = Object.FindFirstObjectByType<Timer>(); // AI-ADDED
         if (timer != null) // AI-ADDED
         {
             data.playerElapsedTime = timer.GetElapsedTime(); // AI-ADDED
@@ -101,6 +102,7 @@ public static bool LoadAfterSceneLoad = false;
         }
     }
 
+    [System.Obsolete]
     public static void LoadGame() 
     {
         if (!File.Exists(SaveFilePath))
