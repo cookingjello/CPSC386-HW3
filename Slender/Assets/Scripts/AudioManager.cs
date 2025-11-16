@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip health;
     public AudioClip speedPowerUp;
     public AudioClip healthPowerUp;
+    public AudioClip chestOpen;
 
     private void Awake()
     {
@@ -61,5 +62,10 @@ public class AudioManager : MonoBehaviour
     public void PlayPowerUp(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip); //AI ADDED
+    }
+
+    public void PlayChest(AudioClip clip)
+    {
+        SFXSource.PlayOneShot(clip);
     }
 }

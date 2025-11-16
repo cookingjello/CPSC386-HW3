@@ -30,6 +30,13 @@ public static bool LoadAfterSceneLoad = false;
     }
 
     [System.Serializable]
+    private class ChestEntry
+    {
+        public string chestID;
+        public bool isOpened;
+    }
+
+    [System.Serializable]
     private class SaveData
     {
         public float playerX;
@@ -40,6 +47,7 @@ public static bool LoadAfterSceneLoad = false;
         public float playerElapsedTime; // AI-ADDED
         public int numberOfPapers;
         public List<PaperEntry> papers = new List<PaperEntry>();
+        public List<ChestEntry> chests = new List<ChestEntry>(); // AI-ADDED
     }
 
     
@@ -89,6 +97,19 @@ public static bool LoadAfterSceneLoad = false;
             pe.isActive = p.gameObject.activeSelf;
             data.papers.Add(pe);
         }
+
+        // Save all Chest open states // AI-ADDED
+        var allChests = Resources.FindObjectsOfTypeAll<Chest>(); // AI-ADDED
+        foreach (var chest in allChests) // AI-ADDED
+        {
+            if (chest == null || chest.gameObject == null) continue; // AI-ADDED
+            if (chest.gameObject.scene != activeScene) continue; // AI-ADDED
+
+            ChestEntry ce = new ChestEntry(); // AI-ADDED
+            ce.chestID = chest.ChestID; // AI-ADDED
+            ce.isOpened = chest.IsOpened; // AI-ADDED
+            data.chests.Add(ce); // AI-ADDED
+        } // AI-ADDED
 
         string json = JsonUtility.ToJson(data, true);
         try
@@ -190,6 +211,21 @@ public static bool LoadAfterSceneLoad = false;
         {
             Debug.LogWarning(unmatched.Count + " saved papers could not be matched to scene objects.");
         }
+
+        // Restore chest open states by ChestID // AI-ADDED
+        var allChests = Resources.FindObjectsOfTypeAll<Chest>(); // AI-ADDED
+        foreach (var chest in allChests) // AI-ADDED
+        {
+            if (chest == null || chest.gameObject == null) continue; // AI-ADDED
+            if (chest.gameObject.scene != activeScene) continue; // AI-ADDED
+
+            var savedChest = data.chests.Find(c => c.chestID == chest.ChestID); // AI-ADDED
+            if (savedChest != null && savedChest.isOpened) // AI-ADDED
+            {
+                chest.SetOpened(true); // AI-ADDED
+                Debug.Log("Restored chest " + chest.ChestID + " to opened state."); // AI-ADDED
+            } // AI-ADDED
+        } // AI-ADDED
 
         // Update UI if any listeners exist
         if (playerInv != null)
