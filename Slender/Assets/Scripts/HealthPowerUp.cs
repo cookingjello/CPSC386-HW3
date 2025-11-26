@@ -1,30 +1,30 @@
 using UnityEngine;
 
-public class HealthPowerUp : MonoBehaviour
+public class HealthPowerup : MonoBehaviour
 {
-    public float healthInc = 20;
-   
+    public int increase = 2;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("HealthPowerUp: OnTriggerEnter2D called with object: " + collision.gameObject.name); //AI ADDED
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             GameObject player = collision.gameObject;
-            Debug.Log("HealthPowerUp: Player tag matched!"); //AI ADDED
             PlayerHealth playerScript = player.GetComponent<PlayerHealth>();
 
             if (playerScript)
             {
-                Debug.Log("HealthPowerUp: PlayerHealth found, healing player..."); //AI ADDED
-                playerScript.Heal(healthInc); //AI ADDED
-                Debug.Log("HealthPowerUp: Heal called successfully."); //AI ADDED
-                if (AudioManager.Instance != null && AudioManager.Instance.healthPowerUp != null) AudioManager.Instance.PlayPowerUp(AudioManager.Instance.healthPowerUp); //AI ADDED
-                Destroy(gameObject); //AI ADDED
-            } else {
-                Debug.LogWarning("HealthPowerUp: PlayerHealth component not found on " + player.name); //AI ADDED
+                int current = playerScript.GetCurrentHealth();
+
+                // AI-ADDED
+                if (current >= playerScript.maxHealth) // AI-ADDED
+                    return; // AI-ADDED
+
+                int newHealth = current + increase; // AI-ADDED
+                if (newHealth > playerScript.maxHealth) newHealth = playerScript.maxHealth; // AI-ADDED
+
+                playerScript.SetCurrentHealth(newHealth);
+                Destroy(gameObject); 
             }
-        } else {
-            Debug.Log("HealthPowerUp: Tag mismatch. Collision object tag is: '" + collision.tag + "'"); //AI ADDED
         }
     }
 }
