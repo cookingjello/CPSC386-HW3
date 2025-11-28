@@ -6,6 +6,7 @@ Youtube Channel: Rehope Games
 
 Some aspects and lines of this script were modified or added using VS Code Copilot AI.
 Lines specifically added or modified by AI are marked with "AI-ADDED" comments.
+Hello World
 */
 
 
