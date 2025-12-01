@@ -8,6 +8,14 @@ public class PageSpawner : MonoBehaviour
 
     void Start()
     {
+        // If a saved game was requested (Continue) we should not spawn the default pages.
+        // SaveManager.LoadAfterSceneLoad is set by the menu when Continue is chosen.
+        if (SaveManager.LoadAfterSceneLoad)
+        {
+            Debug.Log("PageSpawner: skipping SpawnPages because a saved game will be loaded.");
+            return;
+        }
+
         SpawnPages();
     }
 

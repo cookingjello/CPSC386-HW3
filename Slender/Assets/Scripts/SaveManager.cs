@@ -250,6 +250,26 @@ public static bool LoadAfterSceneLoad = false;
         if (unmatched.Count > 0)
         {
             Debug.LogWarning(unmatched.Count + " saved papers could not be matched to scene objects.");
+
+            // If we are continuing from a save and the default spawner skipped spawning, try to instantiate missing papers
+            var spawner = Object.FindObjectOfType<PageSpawner>();
+            if (spawner != null && spawner.pagePrefab != null)
+            {
+                Debug.Log("SaveManager: instantiating " + unmatched.Count + " saved papers using PageSpawner.pagePrefab.");
+                foreach (var pe in new List<PaperEntry>(unmatched))
+                {
+                    try
+                    {
+                        var go = Object.Instantiate(spawner.pagePrefab, new Vector3(pe.x, pe.y, pe.z), Quaternion.identity);
+                        go.SetActive(pe.isActive);
+                    }
+                    catch (System.Exception e)
+                    {
+                        Debug.LogError("Failed to instantiate saved paper prefab: " + e.Message);
+                    }
+                }
+                unmatched.Clear();
+            }
         }
 
         // Restore chest open states by ChestID // AI-ADDED
