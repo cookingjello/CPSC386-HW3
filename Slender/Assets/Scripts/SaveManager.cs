@@ -56,6 +56,7 @@ public static bool LoadAfterSceneLoad = false;
         public int playerMaxHealth; // AI-ADDED
         public float playerElapsedTime; // AI-ADDED
         public int numberOfPapers;
+        public float playerSpeed; // AI-ADDED: persist player movement speed (for speed powerup)
         public List<PaperEntry> papers = new List<PaperEntry>();
         public List<ChestEntry> chests = new List<ChestEntry>(); // AI-ADDED
         public List<PowerupEntry> powerups = new List<PowerupEntry>(); // AI-ADDED
@@ -86,6 +87,13 @@ public static bool LoadAfterSceneLoad = false;
             data.playerCurrentHealth = playerHealth.GetCurrentHealth(); // AI-ADDED
             data.playerMaxHealth = playerHealth.maxHealth; // AI-ADDED
         } // AI-ADDED
+
+        // Save player speed (Movement component) so speed powerups persist
+        var playerMovement = Object.FindFirstObjectByType<Movement>();
+        if (playerMovement != null)
+        {
+            data.playerSpeed = playerMovement.speed;
+        }
 
         // Save timer if present // AI-ADDED
         var timer = Object.FindFirstObjectByType<Timer>(); // AI-ADDED
@@ -204,6 +212,13 @@ public static bool LoadAfterSceneLoad = false;
 
             playerHealth.SetCurrentHealth(data.playerCurrentHealth); // AI-ADDED
         } // AI-ADDED
+
+        // Restore player speed if Movement exists
+        var playerMovement = Object.FindObjectOfType<Movement>();
+        if (playerMovement != null && data.playerSpeed > 0f)
+        {
+            playerMovement.speed = data.playerSpeed;
+        }
 
         // Restore timer if present // AI-ADDED
         var timer = Object.FindObjectOfType<Timer>(); // AI-ADDED
