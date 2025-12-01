@@ -31,11 +31,9 @@ public class PlayerHealth : MonoBehaviour
         if (audioMgr != null && audioMgr.health != null) audioMgr.PlayHealth(audioMgr.health); //AI-ADDED
 
         // Show damage flash on UI (use unscaled time so flash still works when game is paused)
-        // Ensure a DamageFlash exists and show a flash
-        DamageFlash.EnsureInstance();
+        // Trigger a simple damage flash if a DamageFlash component is present in the scene
         if (DamageFlash.Instance != null)
         {
-            Debug.Log("PlayerHealth: triggering damage flash");
             DamageFlash.Instance.Flash();
         }
 

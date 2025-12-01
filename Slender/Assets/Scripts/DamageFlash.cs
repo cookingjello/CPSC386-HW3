@@ -1,17 +1,18 @@
+/*
+    This script was written with the VS Vode build in AI assistance. All prompts associated with the creation of this script
+    can be found in the project documentation. 
+*/
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Full-screen red flash when the player takes damage. Attach this to a UI GameObject (or it will create one at runtime).
-/// Usage: DamageFlash.Instance?.Flash(duration = 0.4f, maxAlpha = 0.8f);
-/// </summary>
 public class DamageFlash : MonoBehaviour
 {
     public static DamageFlash Instance { get; private set; }
 
     [Header("Runtime/Editor - UI setup")]
-    [Tooltip("Optional: assign a UI Image here (full screen) to use for the flash. If null the script will create one at runtime.")]
+    [Tooltip("Assign a full-screen UI Image here in the Inspector. This script will use that image to flash red when damaged.")]
     public Image flashImage;
 
     [Tooltip("How long a single flash lasts (seconds)")]
@@ -23,67 +24,22 @@ public class DamageFlash : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("DamageFlash: Awake - initializing");
+        // Basic singleton reference for convenient access. Do not auto-create UI elements here — keep setup simple for class.
         if (Instance == null) Instance = this; else if (Instance != this) Destroy(gameObject);
 
         if (flashImage == null)
         {
-            CreateRuntimeFlashImage();
-            Debug.Log("DamageFlash: created runtime UI for flash");
+            Debug.LogWarning("DamageFlash: no flashImage assigned in inspector. Add a UI Image to use the flash.");
+            return;
         }
 
-        if (flashImage != null)
-        {
-            var c = flashImage.color;
-            c.a = 0f;
-            flashImage.color = c;
-            flashImage.raycastTarget = false; // don't block clicks
-        }
-
-        DontDestroyOnLoad(gameObject);
+        // Ensure starting alpha is zero
+        var c = flashImage.color;
+        c.a = 0f;
+        flashImage.color = c;
+        flashImage.raycastTarget = false; // don't block clicks
     }
 
-    /// <summary>
-    /// Ensure there is an active DamageFlash instance in the scene. Creates one if necessary.
-    /// </summary>
-    public static DamageFlash EnsureInstance()
-    {
-        if (Instance != null) return Instance;
-
-        var go = new GameObject("DamageFlashManager");
-        // Add component and let its Awake handle creating flash image
-        var comp = go.AddComponent<DamageFlash>();
-        return comp;
-    }
-
-    void CreateRuntimeFlashImage()
-    {
-        // Create a canvas and fullscreen image so this works even without editor setup.
-        var canvasGO = new GameObject("DamageFlashCanvas");
-        var canvas = canvasGO.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 1000; // draw on top
-        canvasGO.AddComponent<CanvasScaler>();
-        canvasGO.AddComponent<GraphicRaycaster>();
-
-        var imageGO = new GameObject("DamageFlashImage");
-        imageGO.transform.SetParent(canvasGO.transform, false);
-        var image = imageGO.AddComponent<Image>();
-        image.color = new Color(1f, 0f, 0f, 0f); // transparent red
-        image.rectTransform.anchorMin = Vector2.zero;
-        image.rectTransform.anchorMax = Vector2.one;
-        image.rectTransform.anchoredPosition = Vector2.zero;
-        image.rectTransform.sizeDelta = Vector2.zero;
-
-        flashImage = image;
-
-        // Move manager object under canvas so it survives scene loads but the UI is available
-        transform.SetParent(canvasGO.transform, false);
-    }
-
-    /// <summary>
-    /// Trigger a screen flash. Safe to call repeatedly.
-    /// </summary>
     public void Flash(float duration = -1f, float maxAlpha = -1f)
     {
         if (flashImage == null) return;
@@ -91,7 +47,6 @@ public class DamageFlash : MonoBehaviour
         if (maxAlpha < 0f) maxAlpha = defaultMaxAlpha;
         maxAlpha = Mathf.Clamp01(maxAlpha);
         StopAllCoroutines();
-        Debug.Log($"DamageFlash: Flash called - duration={duration}, maxAlpha={maxAlpha}");
         StartCoroutine(DoFlash(duration, maxAlpha));
     }
 

@@ -16079,7 +16079,7 @@ Tilemap:
       - {fileID: -2778594094790943464, guid: 003ccec1e1056d440ac8ec026d84cd86, type: 3}
       - {fileID: -2960582073617116908, guid: 2a58aee7a878e6546be25632e9b7d447, type: 3}
       - {fileID: 8965404559091589858, guid: d5f2f29a3497859458b7dad17de6ba2c, type: 3}
-      m_AnimationSpeed: 2.82
+      m_AnimationSpeed: 2.8200002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 45, y: -15, z: 0}
@@ -16184,7 +16184,7 @@ Tilemap:
       - {fileID: -2778594094790943464, guid: 003ccec1e1056d440ac8ec026d84cd86, type: 3}
       - {fileID: -2960582073617116908, guid: 2a58aee7a878e6546be25632e9b7d447, type: 3}
       - {fileID: 8965404559091589858, guid: d5f2f29a3497859458b7dad17de6ba2c, type: 3}
-      m_AnimationSpeed: 2.8200002
+      m_AnimationSpeed: 2.82
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 42, y: 25, z: 0}
@@ -16229,7 +16229,7 @@ Tilemap:
       - {fileID: -2778594094790943464, guid: 003ccec1e1056d440ac8ec026d84cd86, type: 3}
       - {fileID: -2960582073617116908, guid: 2a58aee7a878e6546be25632e9b7d447, type: 3}
       - {fileID: 8965404559091589858, guid: d5f2f29a3497859458b7dad17de6ba2c, type: 3}
-      m_AnimationSpeed: 2.8200002
+      m_AnimationSpeed: 2.82
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -6, y: 32, z: 0}
@@ -16244,7 +16244,7 @@ Tilemap:
       - {fileID: -2778594094790943464, guid: 003ccec1e1056d440ac8ec026d84cd86, type: 3}
       - {fileID: -2960582073617116908, guid: 2a58aee7a878e6546be25632e9b7d447, type: 3}
       - {fileID: 8965404559091589858, guid: d5f2f29a3497859458b7dad17de6ba2c, type: 3}
-      m_AnimationSpeed: 2.82
+      m_AnimationSpeed: 2.8200002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -6, y: 36, z: 0}
@@ -16259,7 +16259,7 @@ Tilemap:
       - {fileID: -2778594094790943464, guid: 003ccec1e1056d440ac8ec026d84cd86, type: 3}
       - {fileID: -2960582073617116908, guid: 2a58aee7a878e6546be25632e9b7d447, type: 3}
       - {fileID: 8965404559091589858, guid: d5f2f29a3497859458b7dad17de6ba2c, type: 3}
-      m_AnimationSpeed: 2.82
+      m_AnimationSpeed: 2.8200002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -117276,9 +117276,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Collect 8 pages to escape\n\nThere is a monster looking for you \n\nDon't
-    let him get in your light (even through walls)\n\nUse WASD to navigate the map\n\nUse
-    E to interact with chests"
+  m_text: "Collect 8 pages to escape\n\nOne page is in a chet\n\nThere is a monster
+    looking for you \n\nDon't let him get in your light (even through walls)\n\nUse
+    WASD to navigate the map\n\nUse E to interact with chests"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b412c3df0ba934b4a8f3c210764bfee0, type: 2}
   m_sharedMaterial: {fileID: -2812303618922149528, guid: b412c3df0ba934b4a8f3c210764bfee0, type: 2}
@@ -118701,6 +118701,7 @@ RectTransform:
   - {fileID: 582373451}
   - {fileID: 1541737182}
   - {fileID: 1355218105}
+  - {fileID: 1508697859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -121036,6 +121037,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 535436889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1508697858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1508697859}
+  - component: {fileID: 1508697861}
+  - component: {fileID: 1508697860}
+  m_Layer: 5
+  m_Name: DamageFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1508697859
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508697858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1008946399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000024795532, y: -0.000020742416}
+  m_SizeDelta: {x: 1973.3716, y: 1126.6074}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1508697860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508697858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1508697861
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508697858}
+  m_CullTransparentMesh: 1
 --- !u!1 &1541737181
 GameObject:
   m_ObjectHideFlags: 0
@@ -121561,7 +121637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: -250}
+  m_AnchoredPosition: {x: -4, y: -367.54}
   m_SizeDelta: {x: 300, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1640420838
@@ -122620,6 +122696,7 @@ GameObject:
   - component: {fileID: 1843183963}
   - component: {fileID: 1843183964}
   - component: {fileID: 1843183965}
+  - component: {fileID: 1843183966}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -122967,6 +123044,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1843183966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843183956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a464de4af0dc53c4ea4e8a9769149970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashImage: {fileID: 1508697860}
+  flashDuration: 0.4
+  defaultMaxAlpha: 0.25
 --- !u!1001 &1876049337
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,7 +1,9 @@
 /*
     This script was written with AI using a prompt that could easily be understood by a human.  The aggression factor is inspired by the aggression 
     scaling in Five Nights at Freddy's.  The teleporting location and frequency is inspired by the original slenderman code.
+    All prompts associated with the creation of this script can be found in the project documentation. 
 */
+
 using UnityEngine;
 
 public class EnemyTeleport : MonoBehaviour
