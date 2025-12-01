@@ -37,6 +37,16 @@ public static bool LoadAfterSceneLoad = false;
     }
 
     [System.Serializable]
+    private class PowerupEntry
+    {
+        public float x;
+        public float y;
+        public float z;
+        public bool isActive;
+        public string type; // e.g., "Health" or "Speed"
+    }
+
+    [System.Serializable]
     private class SaveData
     {
         public float playerX;
@@ -48,6 +58,7 @@ public static bool LoadAfterSceneLoad = false;
         public int numberOfPapers;
         public List<PaperEntry> papers = new List<PaperEntry>();
         public List<ChestEntry> chests = new List<ChestEntry>(); // AI-ADDED
+        public List<PowerupEntry> powerups = new List<PowerupEntry>(); // AI-ADDED
     }
 
     
@@ -110,6 +121,35 @@ public static bool LoadAfterSceneLoad = false;
             ce.isOpened = chest.IsOpened; // AI-ADDED
             data.chests.Add(ce); // AI-ADDED
         } // AI-ADDED
+
+        // Save powerup pickup active states (health/speed)
+        var allHealthPowerups = Resources.FindObjectsOfTypeAll<HealthPowerup>();
+        foreach (var pu in allHealthPowerups)
+        {
+            if (pu == null || pu.gameObject == null) continue;
+            if (pu.gameObject.scene != activeScene) continue;
+
+            PowerupEntry pue = new PowerupEntry();
+            var pos = pu.transform.position;
+            pue.x = pos.x; pue.y = pos.y; pue.z = pos.z;
+            pue.isActive = pu.gameObject.activeSelf;
+            pue.type = "Health";
+            data.powerups.Add(pue);
+        }
+
+        var allSpeedPowerups = Resources.FindObjectsOfTypeAll<SpeedPowerup>();
+        foreach (var pu in allSpeedPowerups)
+        {
+            if (pu == null || pu.gameObject == null) continue;
+            if (pu.gameObject.scene != activeScene) continue;
+
+            PowerupEntry pue = new PowerupEntry();
+            var pos = pu.transform.position;
+            pue.x = pos.x; pue.y = pos.y; pue.z = pos.z;
+            pue.isActive = pu.gameObject.activeSelf;
+            pue.type = "Speed";
+            data.powerups.Add(pue);
+        }
 
         string json = JsonUtility.ToJson(data, true);
         try
@@ -226,6 +266,54 @@ public static bool LoadAfterSceneLoad = false;
                 Debug.Log("Restored chest " + chest.ChestID + " to opened state."); // AI-ADDED
             } // AI-ADDED
         } // AI-ADDED
+
+        // Restore powerup active states by position and type
+        var allHealthPUs = Resources.FindObjectsOfTypeAll<HealthPowerup>();
+        var allSpeedPUs = Resources.FindObjectsOfTypeAll<SpeedPowerup>();
+
+        var unmatchedPowerups = new List<PowerupEntry>(data.powerups);
+
+        // helper local function to try match a powerup component to saved entries
+        System.Action<Transform, string> matchPowerup = (t, type) =>
+        {
+            var pos = t.position;
+            int found = -1;
+            for (int i = 0; i < unmatchedPowerups.Count; i++)
+            {
+                var pe = unmatchedPowerups[i];
+                if (pe.type != type) continue;
+                if (Mathf.Abs(pe.x - pos.x) < matchEpsilon && Mathf.Abs(pe.y - pos.y) < matchEpsilon && Mathf.Abs(pe.z - pos.z) < matchEpsilon)
+                {
+                    found = i; break;
+                }
+            }
+
+            if (found >= 0)
+            {
+                var pe = unmatchedPowerups[found];
+                t.gameObject.SetActive(pe.isActive);
+                unmatchedPowerups.RemoveAt(found);
+            }
+        };
+
+        foreach (var pu in allHealthPUs)
+        {
+            if (pu == null || pu.gameObject == null) continue;
+            if (pu.gameObject.scene != activeScene) continue;
+            matchPowerup(pu.transform, "Health");
+        }
+
+        foreach (var pu in allSpeedPUs)
+        {
+            if (pu == null || pu.gameObject == null) continue;
+            if (pu.gameObject.scene != activeScene) continue;
+            matchPowerup(pu.transform, "Speed");
+        }
+
+        if (unmatchedPowerups.Count > 0)
+        {
+            Debug.LogWarning(unmatchedPowerups.Count + " saved powerups could not be matched to scene objects.");
+        }
 
         // Update UI if any listeners exist
         if (playerInv != null)

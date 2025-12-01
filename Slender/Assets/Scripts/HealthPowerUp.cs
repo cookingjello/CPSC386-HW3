@@ -1,8 +1,13 @@
+/*
+Some aspects and lines of this script were modified or added using VS Code Copilot AI. 
+Lines specifically added or modified by AI are marked with "AI-ADDED" comments.
+*/
+
 using UnityEngine;
 
 public class HealthPowerup : MonoBehaviour
 {
-    public int increase = 2;
+    public int increase = 20;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,8 +18,10 @@ public class HealthPowerup : MonoBehaviour
 
             if (playerScript)
             {
-                int current = playerScript.GetCurrentHealth();
 
+                
+                int current = playerScript.GetCurrentHealth();
+if (AudioManager.Instance != null && AudioManager.Instance.healthPowerUp != null) AudioManager.Instance.PlayPowerUp(AudioManager.Instance.healthPowerUp); //AI ADDED
                 // AI-ADDED
                 if (current >= playerScript.maxHealth) // AI-ADDED
                     return; // AI-ADDED
@@ -23,7 +30,8 @@ public class HealthPowerup : MonoBehaviour
                 if (newHealth > playerScript.maxHealth) newHealth = playerScript.maxHealth; // AI-ADDED
 
                 playerScript.SetCurrentHealth(newHealth);
-                Destroy(gameObject); 
+                // Instead of destroying the pickup, deactivate it so it can be saved and restored by SaveManager
+                gameObject.SetActive(false);
             }
         }
     }
