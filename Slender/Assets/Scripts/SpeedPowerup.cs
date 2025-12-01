@@ -1,3 +1,7 @@
+/*
+Some aspects and lines of this script were modified or added using VS Code Copilot AI. 
+Lines specifically added or modified by AI are marked with "AI-ADDED" comments.
+*/
 using UnityEngine;
 
 public class SpeedPowerup : MonoBehaviour
@@ -15,7 +19,8 @@ public class SpeedPowerup : MonoBehaviour
             {
                 playerScript.speed += increase; //AI ADDED
                 if (AudioManager.Instance != null && AudioManager.Instance.speedPowerUp != null) AudioManager.Instance.PlayPowerUp(AudioManager.Instance.speedPowerUp); //AI ADDED
-                Destroy(gameObject); //AI ADDED
+                // Deactivate instead of destroying so save/load can persist powerup state
+                gameObject.SetActive(false); //AI ADDED
             }
         }
     }
